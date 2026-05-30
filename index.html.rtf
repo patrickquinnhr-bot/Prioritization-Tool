@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Babilou Family US · Strategy Workshop 2025–2028</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap');
+:root {
+  --ink:#0d1117; --ink2:#3a3f4b; --ink3:#7a7f8e;
+  --bg:#f4f3ef; --bg2:#ffffff; --border:#e0ddd6;
+  --keep:#1a6b4a; --keep-bg:#d6f0e3; --keep-border:#a8dcc4;
+  --pause:#b45309; --pause-bg:#fef3c7; --pause-border:#f6d06b;
+  --drop:#991b1b; --drop-bg:#fee2e2; --drop-border:#fca5a5;
+  --accent:#1e3a5f; --gold:#c9a84c;
+  --bfblue:#02378E;
+  --p0:#0f4c75; --p0l:#e8f4fd;
+  --p1:#1b4332; --p1l:#d8f3dc;
+  --p2:#7c2d12; --p2l:#fff7ed;
+  --p3:#4a1d96; --p3l:#f5f3ff;
+  --p4:#1e3a5f; --p4l:#e8f1fb;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+button{cursor:pointer;font-family:'Lato',sans-serif}
+
+/* LANDING */
+#landing{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.land-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:48px 44px;max-width:500px;width:100%;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.08)}
+.land-logo{font-family:'Playfair Display',serif;font-size:0.9rem;letter-spacing:0.18em;text-transform:uppercase;color:#02378E;margin-bottom:28px}
+.land-box h1{font-family:'Playfair Display',serif;font-size:1.9rem;line-height:1.2;margin-bottom:6px}
+.land-box p{color:var(--ink3);font-size:0.88rem;margin-bottom:32px}
+.land-divider{border:none;border-top:1px solid var(--border);margin:20px 0}
+.land-section-label{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;text-align:left}
+.land-input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:8px;font-family:'Lato',sans-serif;font-size:0.9rem;outline:none;color:var(--ink);margin-bottom:10px}
+.land-input:focus{border-color:var(--accent)}
+.land-input.pin{letter-spacing:0.2em;text-align:center;font-size:1.1rem}
+.btn-land{width:100%;padding:14px 24px;border-radius:10px;border:none;font-size:0.9rem;font-weight:700;letter-spacing:0.04em;transition:all 0.15s;margin-bottom:0}
+.btn-fac{background:var(--ink);color:#fff}
+.btn-fac:hover{background:#1e3a5f}
+.btn-par{background:transparent;border:2px solid var(--ink);color:var(--ink);margin-top:10px}
+.btn-par:hover{background:var(--ink);color:#fff}
+.land-err{color:var(--drop);font-size:0.78rem;min-height:18px;margin-top:4px;margin-bottom:8px;text-align:left}
+
+/* SHARED */
+.app{display:none;flex-direction:column;min-height:100vh}
+.app.active{display:flex}
+.topbar{background:var(--ink);color:#fff;padding:13px 28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.topbar-title{font-family:'Playfair Display',serif;font-size:1.05rem;flex:1}
+.topbar-phase{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;background:rgba(255,255,255,0.12);padding:4px 11px;border-radius:20px}
+.topbar-badge{font-size:0.74rem;color:#a0a0c0}
+.live-badge{display:flex;align-items:center;gap:6px;font-size:0.74rem;color:var(--ink3)}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+
+/* FAC CONTROLS */
+.fac-controls{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 28px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.ctrl-btn{padding:8px 18px;border-radius:7px;border:none;font-size:0.76rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;transition:all 0.15s}
+.ctrl-primary{background:#02378E;color:#fff}
+.ctrl-primary:hover{opacity:0.88}
+.ctrl-primary:disabled{background:#b0b8c4;cursor:not-allowed;opacity:1}
+.ctrl-danger{background:var(--drop-bg);color:var(--drop);border:1px solid var(--drop-border)}
+.ctrl-ghost{background:transparent;border:1px solid var(--border);color:var(--ink2)}
+.ctrl-ghost:hover{background:var(--bg)}
+.ctrl-gold{background:var(--gold);color:#fff}
+.spacer{flex:1}
+
+/* FAC MAIN */
+.fac-main{flex:1;overflow-y:auto;padding:20px 28px 60px}
+.sum-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.sum-card{flex:1;min-width:80px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;text-align:center}
+.sum-card .n{font-family:'Playfair Display',serif;font-size:1.9rem;line-height:1}
+.sum-card .l{font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);margin-top:3px}
+.sc-keep .n{color:var(--keep)} .sc-pause .n{color:var(--pause)} .sc-drop .n{color:var(--drop)} .sc-v .n{color:var(--accent)}
+
+/* Participant progress tracker */
+.par-tracker{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:18px;overflow:hidden}
+.par-tracker-hd{padding:12px 18px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);background:#fafaf8;border-bottom:1px solid var(--border)}
+.par-tracker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0}
+.par-tracker-row{display:flex;align-items:center;gap:8px;padding:9px 16px;border-bottom:1px solid #f0efe9;border-right:1px solid #f0efe9}
+.par-name{font-size:0.8rem;color:var(--ink2);flex:1;font-weight:700}
+.par-pillars-dots{display:flex;gap:3px}
+.pdot{width:12px;height:12px;border-radius:3px;background:#e0ddd6;transition:background 0.3s;position:relative}
+.pdot.done{background:var(--keep)}
+.pdot.partial{background:var(--gold)}
+
+/* Pillar blocks */
+.pillar-block{background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin-bottom:16px;overflow:hidden}
+.pillar-hd{padding:14px 20px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.pillar-hd:hover{filter:brightness(0.97)}
+.pillar-name{font-family:'Playfair Display',serif;font-size:1rem;flex:1}
+.pillar-meta{display:flex;gap:8px;align-items:center}
+.cap-badge{font-size:0.62rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:rgba(0,0,0,0.07)}
+.pillar-toggle{color:var(--ink3);transition:transform 0.2s;font-size:0.85rem}
+.pillar-block.closed .pillar-toggle{transform:rotate(-90deg)}
+.pillar-block.closed .pillar-body{display:none}
+.pillar-body{border-top:1px solid var(--border)}
+.sub-title{padding:8px 20px 6px;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);background:#fafaf8;border-bottom:1px solid var(--border)}
+
+/* Obj row fac */
+.obj-row{display:flex;align-items:flex-start;gap:12px;padding:11px 20px;border-top:1px solid #f0efe9}
+.obj-row:first-of-type{border-top:none}
+.obj-row:hover{background:#fafaf8}
+.obj-text{flex:1;font-size:0.81rem;line-height:1.5;color:var(--ink2)}
+.vote-bars{display:flex;flex-direction:column;gap:3px;min-width:170px}
+.vbar-row{display:flex;align-items:center;gap:5px;font-size:0.7rem}
+.vbar-label{width:16px;text-align:center}
+.vbar-track{flex:1;height:6px;border-radius:3px;background:#eee;overflow:hidden}
+.vbar-fill{height:100%;border-radius:3px;transition:width 0.4s}
+.vbar-fill.keep{background:var(--keep)} .vbar-fill.pause{background:var(--pause)} .vbar-fill.drop{background:var(--drop)}
+.vbar-count{width:20px;text-align:right;color:var(--ink3);font-size:0.66rem}
+.status-chip{font-size:0.6rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 8px;border-radius:8px;flex-shrink:0;margin-top:1px}
+.chip-keep{background:var(--keep-bg);color:var(--keep)}
+.chip-pause{background:var(--pause-bg);color:var(--pause)}
+.chip-drop{background:var(--drop-bg);color:var(--drop)}
+.chip-tie{background:#fef9c3;color:#854d0e}
+.chip-open{background:#f1f5f9;color:#94a3b8}
+.tie-flag{font-size:0.66rem;color:var(--pause);font-style:italic;margin-top:2px}
+
+/* Phase2 fac */
+.finalist-row{display:flex;align-items:center;gap:10px;padding:11px 20px;border-top:1px solid #f0efe9}
+.finalist-row:hover{background:#fafaf8}
+.finalist-text{flex:1;font-size:0.81rem;line-height:1.5;color:var(--ink2)}
+.finalist-votes{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--accent);min-width:34px;text-align:right}
+.finalist-bar{width:80px;height:7px;border-radius:3px;background:#eee;overflow:hidden}
+.finalist-bar-fill{height:100%;border-radius:3px;background:var(--accent);transition:width 0.5s}
+.finalist-rank{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0}
+.rank-1{background:#fde68a;color:#92400e} .rank-2{background:#e2e8f0;color:#334155} .rank-other{background:#f4f3ef;color:var(--ink3)}
+
+/* Phase2 blocker */
+.phase2-blocker{background:var(--pause-bg);border:1px solid var(--pause-border);border-radius:10px;padding:14px 18px;margin:0 28px 18px;font-size:0.82rem;color:var(--pause);display:flex;align-items:center;gap:10px}
+.phase2-blocker.hidden{display:none!important}
+
+/* PARTICIPANT */
+#par{background:var(--bg)}
+.par-main{flex:1;overflow-y:auto;padding:14px 18px 80px}
+.par-progress-bar{height:5px;background:#e0ddd6}
+.par-progress-fill{height:100%;background:var(--gold);transition:width 0.4s}
+.par-phase-banner{background:#02378E;color:#fff;text-align:center;padding:9px 20px;font-size:0.78rem;letter-spacing:0.04em}
+
+/* Participant pillar card */
+.par-pillar{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.par-pillar-hd{padding:13px 18px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.par-pillar-name{font-family:'Playfair Display',serif;font-size:0.98rem;flex:1}
+.par-pillar-prog{font-size:0.72rem;font-weight:700}
+.par-pillar.done-pillar .par-pillar-hd{opacity:0.7}
+.par-sub-title{padding:7px 18px 5px;font-size:0.63rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);background:#fafaf8;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.par-obj{display:flex;align-items:flex-start;gap:8px;padding:10px 18px;border-top:1px solid #f0efe9}
+.par-obj:first-of-type{border-top:none}
+.par-obj-text{flex:1;font-size:0.8rem;line-height:1.5;color:var(--ink2)}
+.par-btns{display:flex;gap:3px;flex-shrink:0;margin-top:1px}
+.pbtn{width:34px;height:34px;border-radius:8px;border:1.5px solid #e0ddd6;background:var(--bg);font-size:0.95rem;display:flex;align-items:center;justify-content:center;transition:all 0.12s}
+.pbtn:hover{transform:scale(1.1)}
+.pbtn.ak{background:var(--keep-bg);border-color:var(--keep)}
+.pbtn.ap{background:var(--pause-bg);border-color:var(--pause)}
+.pbtn.ad{background:var(--drop-bg);border-color:var(--drop)}
+
+/* Pillar confirm section */
+.pillar-confirm-bar{padding:12px 18px;background:#fafaf8;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.pillar-confirm-bar.completed{background:var(--keep-bg)}
+.confirm-btn{padding:9px 20px;border-radius:8px;border:none;font-size:0.8rem;font-weight:700;background:var(--accent);color:#fff;transition:all 0.15s}
+.confirm-btn:hover{opacity:0.88}
+.confirm-btn:disabled{background:#b0b8c4;cursor:not-allowed}
+.confirm-check{font-size:0.8rem;color:var(--keep);font-weight:700;display:flex;align-items:center;gap:6px}
+.confirm-warning{font-size:0.75rem;color:var(--pause)}
+.confirm-missing{font-size:0.75rem;color:var(--ink3)}
+.confirm-error{font-size:0.78rem;color:var(--drop);font-weight:700;background:var(--drop-bg);border:1px solid var(--drop-border);border-radius:7px;padding:8px 12px;margin-right:8px}
+
+/* Done pillar overlay */
+.par-pillar.done-pillar .pillar-body{position:relative}
+.done-overlay{display:none;position:absolute;inset:0;background:rgba(214,240,227,0.6);align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;color:var(--keep);font-family:'Playfair Display',serif;flex-direction:column;gap:6px;backdrop-filter:blur(2px)}
+.done-overlay small{font-size:0.75rem;font-weight:400;font-family:'Lato',sans-serif;color:var(--keep)}
+.par-pillar.done-pillar .done-overlay{display:flex}
+
+/* Waiting / submitted */
+.par-submitted{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 20px;text-align:center;gap:10px}
+.par-submitted .big{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--ink)}
+.par-submitted .sm{font-size:0.84rem;color:var(--ink3);max-width:280px}
+.par-submitted-icon{font-size:2.8rem;margin-bottom:4px}
+.waiting-anim{display:flex;gap:6px;margin-top:14px}
+.wdot{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:wb 1.2s infinite}
+.wdot:nth-child(2){animation-delay:0.2s}.wdot:nth-child(3){animation-delay:0.4s}
+@keyframes wb{0%,100%{transform:scale(1)}50%{transform:scale(1.6)}}
+
+/* Phase 2 participant */
+.par-p2-limit{border-radius:8px;padding:10px 16px;font-size:0.79rem;margin-bottom:12px;text-align:center}
+.par-p2-obj{display:flex;align-items:flex-start;gap:10px;padding:11px 18px;border-top:1px solid #f0efe9;transition:background 0.12s;cursor:pointer}
+.par-p2-obj.selected{background:var(--keep-bg)}
+.par-p2-obj.selected .par-obj-text{font-weight:700;color:var(--keep)}
+.par-p2-obj.locked:not(.selected){opacity:0.45;cursor:default}
+.p2-checkbox{width:22px;height:22px;border-radius:5px;border:2px solid var(--border);background:#fff;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;transition:all 0.12s}
+.p2-checkbox.checked{background:var(--keep);border-color:var(--keep);color:#fff}
+
+/* Results */
+.results-overlay{display:none;position:fixed;inset:0;background:rgba(13,17,23,0.88);z-index:300;overflow-y:auto;padding:28px 16px}
+.results-overlay.open{display:block}
+.results-box{background:var(--bg2);border-radius:18px;max-width:780px;margin:0 auto;overflow:hidden}
+.results-hd{background:var(--ink);color:#fff;padding:24px 28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.results-hd h2{font-family:'Playfair Display',serif;font-size:1.45rem;flex:1}
+.results-close{background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:7px;padding:7px 14px;font-size:0.76rem;font-weight:700}
+.results-export{background:var(--gold);border:none;color:#fff;border-radius:7px;padding:7px 14px;font-size:0.76rem;font-weight:700}
+.results-body{padding:24px 28px}
+.results-pillar{margin-bottom:22px}
+.rp-title{font-family:'Playfair Display',serif;font-size:0.98rem;margin-bottom:8px;padding-bottom:7px;border-bottom:2px solid var(--border)}
+.result-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-top:1px solid #f4f3ef}
+.result-item:first-child{border-top:none}
+.ri-icon{font-size:0.95rem;margin-top:2px;flex-shrink:0}
+.ri-text{font-size:0.8rem;line-height:1.5;color:var(--ink2);flex:1}
+.ri-meta{font-size:0.66rem;color:var(--ink3);white-space:nowrap}
+.finalist-rank-sm{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;flex-shrink:0}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- LANDING -->
+<div id="landing">
+  <div class="land-box">
+    <div class="land-logo-img"><img src="https://live-babilou-family.twic.pics/wp-content/uploads/2026/02/babilou-family-logo@2x.png" alt="Babilou Family" style="height:36px;display:block;margin:0 auto 20px"></div>
+    <h1>Strategy Prioritization Workshop</h1>
+    <p>Babilou Family US · Strategic Plan 2025–2028</p>
+
+    <div class="land-section-label">Facilitator Access</div>
+    <input class="land-input pin" type="password" id="facPin" placeholder="Enter PIN" maxlength="6">
+    <div class="land-err" id="pinErr"></div>
+    <button class="btn-land btn-fac" onclick="enterFacilitator()">Enter as Facilitator →</button>
+
+    <hr class="land-divider">
+
+    <div class="land-section-label">Participant Access</div>
+    <input class="land-input" type="text" id="parName" placeholder="Your full name">
+    <button class="btn-land btn-par" onclick="enterParticipant()">Join as Participant →</button>
+  </div>
+</div>
+
+<!-- FACILITATOR -->
+<div class="app" id="fac">
+  <div class="topbar">
+    <div class="topbar-title"><img src="https://live-babilou-family.twic.pics/wp-content/uploads/2026/02/babilou-family-logo@2x.png" alt="Babilou Family" style="height:22px;vertical-align:middle;margin-right:10px;filter:brightness(0) invert(1)">Strategy Workshop — Facilitator</div>
+    <div class="topbar-phase" id="facPhaseLabel">Phase 1: Priority Voting</div>
+    <div class="live-badge"><span class="live-dot"></span><span id="voterCount">0 participants</span></div>
+    <button class="ctrl-btn ctrl-gold" onclick="showResults()">View Results</button>
+  </div>
+  <div class="fac-controls">
+    <div class="live-badge"><span class="live-dot"></span><span id="liveStatus">Waiting for participants…</span></div>
+    <div class="spacer"></div>
+    <button class="ctrl-btn ctrl-ghost" onclick="resetAllVotes()">Reset All</button>
+    <button class="ctrl-btn ctrl-primary" id="advanceBtn" onclick="advancePhase()">Advance to Phase 2 →</button>
+  </div>
+  <div class="phase2-blocker hidden" id="phase2Blocker">
+    ⏳ <span id="blockerMsg">Waiting for participants to complete voting before advancing to Phase 2.</span>
+  </div>
+  <div class="fac-main" id="facMain">
+    <div class="sum-row" id="facSummary"></div>
+    <div id="parTracker"></div>
+    <div id="facPillars"></div>
+  </div>
+</div>
+
+<!-- PARTICIPANT -->
+<div class="app" id="par">
+  <div class="topbar">
+    <div class="topbar-title"><img src="https://live-babilou-family.twic.pics/wp-content/uploads/2026/02/babilou-family-logo@2x.png" alt="Babilou Family" style="height:20px;vertical-align:middle;margin-right:8px;filter:brightness(0) invert(1)">Strategy Workshop</div>
+    <div class="topbar-phase" id="parPhaseLabel">Phase 1: Prioritize</div>
+    <div class="topbar-badge" id="parNameBadge"></div>
+  </div>
+  <div class="par-progress-bar"><div class="par-progress-fill" id="parProgress" style="width:0%"></div></div>
+  <div class="par-phase-banner" id="parPhaseBanner">Vote on each objective: ✅ Keep · ⏸ Pause · ❌ De-prioritize — then confirm each pillar</div>
+  <div class="par-main" id="parMain"></div>
+</div>
+
+<!-- RESULTS OVERLAY -->
+<div class="results-overlay" id="resultsOverlay">
+  <div class="results-box">
+    <div class="results-hd">
+      <h2>Workshop Results</h2>
+      <button class="results-export" onclick="exportResults()">Export .txt</button>
+      <button class="results-close" onclick="closeResults()">Close</button>
+    </div>
+    <div class="results-body" id="resultsBody"></div>
+  </div>
+</div>
+
+<script>
+// ─── CONFIG ───────────────────────────────────
+const PIN = "2025";
+const MAX_PER_PILLAR = 3;
+const P2_PICKS = 2;
+const MIN_VOTERS_FOR_PHASE2 = 1; // lower threshold for testing; set to e.g. 8 for real session
+const SYNC_MS = 2500;
+
+// ─── DATA ─────────────────────────────────────
+const PILLAR_COLORS = [
+  {main:'#0f4c75',light:'#e8f4fd'},
+  {main:'#1b4332',light:'#d8f3dc'},
+  {main:'#7c2d12',light:'#fff7ed'},
+  {main:'#4a1d96',light:'#f5f3ff'},
+  {main:'#1e3a5f',light:'#e8f1fb'},
+];
+
+const DATA = [
+  {pillar:'Excellence in Education',subpillars:[
+    {name:'Safest Place for Every Child',items:[
+      'Implement and train a Health & Safety coordinator in every school by 2026.',
+      'Engaged platform fully rolled out and auditing all schools 2× per year.',
+      'Introduce center-level quality dashboards (NPS, curriculum, compliance).',
+    ]},
+    {name:'Uncompromising Quality & Consistency',items:[
+      'Introduce the Regional Pedagogical Advisor role (1 RPA per 7–8 schools) for curriculum coaching.',
+      'Evaluate and standardize the family onboarding process across all centers.',
+      'Upskill and certify all educators via an internal teacher training academy with HEI partnership.',
+      'Launch a company-wide national conference on core pillars of sustainable education.',
+    ]},
+    {name:'Integrate Sustainable Education',items:[
+      'Create a Sustainable Education toolbox for teachers and school leaders for lesson planning.',
+      'Increase partnerships with educational third parties to support teacher well-being.',
+    ]},
+    {name:'Putting the Family Experience at our Core',items:[
+      'Introduce bi-annual parent-teacher progress and observation sessions across every center.',
+      'Launch a national parental advisory committee meeting quarterly.',
+      'Evaluate portfolio for NAEYC accreditation eligibility and build activation plan by 2028.',
+    ]},
+  ]},
+  {pillar:'Empowered People & Culture',subpillars:[
+    {name:'Exceptional Onboarding & Early Experience',items:[
+      'Design and roll out a national onboarding framework with 7-30-60-90-day milestones.',
+      'Optimize and roll out peer mentor program to support every new hire.',
+      'Optimize new hire feedback loop to continuously refine the onboarding framework.',
+    ]},
+    {name:'Championing Continuous Learning & Growth',items:[
+      'Introduce bi-annual professional assessment process with personalized development plans.',
+      'Introduce bi-annual learning commitment modules beyond compliance.',
+      'Expand the Babilou Family Lead program to a local-level leadership development program.',
+    ]},
+    {name:'Managing the Employee Lifecycle',items:[
+      'Roll out a national HR Dashboard for visibility across the full employee lifecycle.',
+      'Define clear and transparent career pathways for all specialist positions.',
+      'Effective rollout and continued development of MyBFF communication platform.',
+    ]},
+    {name:'Establishing a Culture of Belonging',items:[
+      'Align policies, branding, and rituals across the network as one company, one mission.',
+      'Introduce center-level recognition rituals and network-wide award programs.',
+      'Implement thought leadership group for employee feedback to leadership.',
+    ]},
+  ]},
+  {pillar:'Scalable Operational Excellence',subpillars:[
+    {name:'Simplify and Replicate Our Operating Model',items:[
+      'Standardize systems, processes, and reporting across 100% of centers.',
+      'Develop a national operating framework covering compliance, staffing, finance, and family engagement.',
+      'Create a strategic blueprint to accelerate greenfield openings and M&A integrations.',
+    ]},
+    {name:'Operational Discipline & Continuous Improvement',items:[
+      'Introduce weekly KPI dashboards at center level (occupancy, NPS, staff costs, compliance).',
+      'Introduce a national cadence of operational performance reviews with escalation pathways.',
+      'Build a national Continuous Improvement program with a standard problem-solving framework.',
+    ]},
+    {name:'Drive Digital Innovation & Automation',items:[
+      'Digitize the customer journey from first contact through enrollment.',
+      'Conduct a full review of digital platforms across HR, billing, CRM, and compliance.',
+      'Improve labor management through predictive scheduling and AI-driven occupancy forecasting.',
+    ]},
+    {name:'Scaled & Simplified Procurement',items:[
+      'Develop a national catalog of standardized products and services.',
+      'Centralize procurement through a national vendor platform with regionally negotiated contracts.',
+      'Deploy a single digital platform for purchasing, approvals, and inventory with finance dashboards.',
+    ]},
+  ]},
+  {pillar:'Market Impact & Commercial Strength',subpillars:[
+    {name:'Optimized Pricing & Value Management',items:[
+      'Define clear tuition benchmarking processes with differentiators and competitor overviews.',
+      'Develop a national pricing framework with localized flexibility.',
+      'Review pricing annually to ensure transparency and market alignment.',
+      'Create clear communication of benefits in all enrollment materials and conversations.',
+    ]},
+    {name:'Build a World-Class Sales & Marketing Engine',items:[
+      'Standardize sales funnel tools and integrate a CRM for end-to-end parent journey visibility.',
+      'Rebuild and professionalize the sales & marketing team with clear roles and accountability.',
+      'Launch a US Sales Academy for center directors and enrollment teams.',
+      'Diversify digital marketing campaigns with advanced analytics and ROI tracking.',
+      'Launch a dedicated B2B sales team with global expertise and clear GTM strategy.',
+    ]},
+    {name:'Sharpen & Communicate Our USP',items:[
+      'Measure market sentiment and develop refreshed brand positioning and USP messaging.',
+      'Retrain all staff to consistently articulate the refreshed USP in all interactions.',
+      'Redevelop all marketing, enrollment, and family communications with updated USP framework.',
+    ]},
+    {name:'Diversify Revenue Beyond Core B2C',items:[
+      'Explore employer-sponsored childcare solutions (reserved seats, near-site hubs, turnkey centers).',
+      'Develop after-school programs with enrichment offerings focused on STEAM and sports.',
+      'Introduce weekend and holiday care programs with 3rd party relationships.',
+    ]},
+  ]},
+  {pillar:'Strategic & Sustainable Growth',subpillars:[
+    {name:'Secure Leadership in New England',items:[
+      'Define cluster density opportunities in MA, NH, VT, and CT.',
+      'Build a central Real Estate & Asset Management team for site selection and portfolio optimization.',
+      'Complete a full portfolio review to identify extensions, renovations, or closures.',
+    ]},
+    {name:'Disciplined Expansion & Market Entry',items:[
+      'Develop a strategic roadmap for expansion into adjacent states (RI, ME, NY).',
+      'Create a regional readiness assessment to guide market entry timing.',
+      'Evaluate and streamline construction and fit-out processes to reduce capital costs.',
+    ]},
+    {name:'Optimized Growth Model for M&A and Greenfield',items:[
+      'Identify, engage and close one M&A deal (1–4 sites) by end of Q3.',
+      'Extend the M&A team to strengthen analysis, sourcing, and evaluation of acquisitions.',
+      'Roll out a greenfield opening playbook (site selection, licensing, staffing, enrollment ramp).',
+      'Stand up a dedicated integration taskforce to align acquisitions within 12 months.',
+    ]},
+  ]},
+];
+
+const ALL_OBJS = [];
+DATA.forEach((p,pi)=>p.subpillars.forEach((s,si)=>s.items.forEach((item,oi)=>{
+  ALL_OBJS.push({pi,si,oi,text:item,key:`${pi}-${si}-${oi}`});
+})));
+const TOTAL = ALL_OBJS.length;
+
+// ─── STATE ────────────────────────────────────
+let role=null, myName='', phase=1;
+let myVotes={};         // key -> 'keep'|'pause'|'drop'
+let myP2Votes={};       // key -> true
+let confirmedPillars=new Set(); // pi confirmed by this participant
+let allSubmitted=false; // participant fully done with phase1
+let p2submitted=false;
+let syncTimer=null;
+let facOpenPillars={}; // pi->bool, default open
+
+// Storage keys (shared=true)
+const SK_VOTES     = 'bff:votes';      // {name:{key:vote}}
+const SK_CONFIRMED = 'bff:confirmed';  // {name:Set→Array of pi}
+const SK_PHASE     = 'bff:phase';
+const SK_FINALISTS = 'bff:finalists';
+const SK_P2VOTES   = 'bff:p2votes';    // {name:{key:true}}
+
+async function sget(k){ try{const r=await window.storage.get(k,true);return r?JSON.parse(r.value):null;}catch{return null;} }
+async function sset(k,v){ try{await window.storage.set(k,JSON.stringify(v),true);}catch{} }
+
+// ─── ENTRY ────────────────────────────────────
+function enterFacilitator(){
+  if(document.getElementById('facPin').value!==PIN){
+    document.getElementById('pinErr').textContent='Incorrect PIN. Please try again.'; return;
+  }
+  role='facilitator';
+  document.getElementById('landing').style.display='none';
+  document.getElementById('fac').classList.add('active');
+  DATA.forEach((_,pi)=>facOpenPillars[pi]=true);
+  initFac();
+}
+function enterParticipant(){
+  const n=document.getElementById('parName').value.trim();
+  if(!n){alert('Please enter your name.');return;}
+  myName=n; role='participant';
+  document.getElementById('landing').style.display='none';
+  document.getElementById('par').classList.add('active');
+  document.getElementById('parNameBadge').textContent=n;
+  initPar();
+}
+
+// ─── FACILITATOR ──────────────────────────────
+async function initFac(){
+  const sp=await sget(SK_PHASE); if(sp) phase=sp;
+  renderFac();
+  syncTimer=setInterval(syncFac, SYNC_MS);
+  syncFac();
+}
+
+async function syncFac(){
+  const [votes,confirmed,sp,finalists,p2votes]=await Promise.all([
+    sget(SK_VOTES)||{}, sget(SK_CONFIRMED)||{}, sget(SK_PHASE), sget(SK_FINALISTS)||[], sget(SK_P2VOTES)||{}
+  ]);
+  const allV=votes||{}, allC=confirmed||{}, allF=finalists||[], allP2=p2votes||{};
+  if(sp&&sp!==phase){phase=sp;}
+  updateFacUI(allV,allC,allF,allP2);
+}
+
+function topVote(v){
+  if(!v) return null;
+  const mx=Math.max(v.keep,v.pause,v.drop);
+  if(mx===0) return null;
+  const winners=[]; 
+  if(v.keep===mx)winners.push('keep');
+  if(v.pause===mx)winners.push('pause');
+  if(v.drop===mx)winners.push('drop');
+  return winners.length===1?winners[0]:'tie';
+}
+function pct(n,t){return t?Math.round(n/t*100):0;}
+
+function updateFacUI(allVotes, allConfirmed, finalists, p2votes){
+  const names=Object.keys(allVotes);
+  const n=names.length;
+  document.getElementById('voterCount').textContent=`${n} participant${n!==1?'s':''}`;
+  document.getElementById('facPhaseLabel').textContent=phase===1?'Phase 1: Priority Voting':'Phase 2: Top-2 Vote';
+
+  // Aggregate
+  const agg={};
+  ALL_OBJS.forEach(o=>agg[o.key]={keep:0,pause:0,drop:0});
+  names.forEach(nm=>{const v=allVotes[nm]||{};Object.entries(v).forEach(([k,vt])=>{if(agg[k]&&vt)agg[k][vt]++;});});
+  const agg2={};
+  Object.values(p2votes).forEach(pv=>{Object.keys(pv).forEach(k=>{agg2[k]=(agg2[k]||0)+1;});});
+
+  // Summary counts
+  let keep=0,pause=0,drop=0;
+  Object.values(agg).forEach(v=>{const w=topVote(v);if(w==='keep')keep++;else if(w==='pause')pause++;else if(w==='drop')drop++;});
+  document.getElementById('facSummary').innerHTML=`
+    <div class="sum-card sc-v"><div class="n">${n}</div><div class="l">Participants</div></div>
+    <div class="sum-card sc-keep"><div class="n">${keep}</div><div class="l">Trending Keep</div></div>
+    <div class="sum-card sc-pause"><div class="n">${pause}</div><div class="l">Trending Pause</div></div>
+    <div class="sum-card sc-drop"><div class="n">${drop}</div><div class="l">Trending Drop</div></div>
+    <div class="sum-card"><div class="n" style="color:var(--gold)">${TOTAL}</div><div class="l">Total Objectives</div></div>`;
+
+  // Participant progress tracker
+  renderParTracker(names, allVotes, allConfirmed, n);
+
+  // Phase2 blocker
+  const blockerEl=document.getElementById('phase2Blocker');
+  const advBtn=document.getElementById('advanceBtn');
+  if(phase===1){
+    const fullyConfirmed=names.filter(nm=>{
+      const c=allConfirmed[nm]||[];
+      return c.length>=DATA.length;
+    }).length;
+    const hasEnough=n>=MIN_VOTERS_FOR_PHASE2 && fullyConfirmed>=Math.ceil(n*0.5);
+    advBtn.disabled=!hasEnough;
+    advBtn.textContent='Advance to Phase 2 →';
+    if(!hasEnough&&n>0){
+      blockerEl.classList.remove('hidden');
+      document.getElementById('blockerMsg').textContent=
+        `${fullyConfirmed}/${n} participant${n!==1?'s':''} have completed all pillars. Advance when the majority are done.`;
+    } else if(n===0){
+      blockerEl.classList.remove('hidden');
+      document.getElementById('blockerMsg').textContent='No participants have joined yet.';
+    } else {
+      blockerEl.classList.add('hidden');
+    }
+    document.getElementById('liveStatus').textContent=`${n} participant${n!==1?'s':''} connected · ${fullyConfirmed} completed all pillars`;
+  } else {
+    advBtn.disabled=false;
+    advBtn.textContent='Show Final Results';
+    blockerEl.classList.add('hidden');
+    document.getElementById('liveStatus').textContent=`Phase 2 live · ${Object.keys(p2votes).length} voted`;
+  }
+
+  renderFacPillars(agg,agg2,n,finalists);
+}
+
+function renderParTracker(names, allVotes, allConfirmed, n){
+  if(n===0){document.getElementById('parTracker').innerHTML='';return;}
+  let rows='';
+  names.forEach(nm=>{
+    const c=allConfirmed[nm]||[];
+    const dots=DATA.map((_,pi)=>{
+      const isDone=c.includes(pi);
+      // count voted in this pillar
+      const pObjs=ALL_OBJS.filter(o=>o.pi===pi);
+      const voted=pObjs.filter(o=>(allVotes[nm]||{})[o.key]).length;
+      const cls=isDone?'done':voted>0?'partial':'';
+      return `<div class="pdot ${cls}" title="Pillar ${pi+1}: ${isDone?'Done':voted>0?voted+' voted':'Not started'}"></div>`;
+    }).join('');
+    rows+=`<div class="par-tracker-row"><div class="par-name">${nm}</div><div class="par-pillars-dots">${dots}</div></div>`;
+  });
+  document.getElementById('parTracker').innerHTML=`
+    <div class="par-tracker">
+      <div class="par-tracker-hd">Participant Progress — 🟨 in progress · 🟩 pillar confirmed</div>
+      <div class="par-tracker-grid">${rows}</div>
+    </div>`;
+}
+
+function renderFacPillars(agg, agg2, n, finalists){
+  let html='';
+  DATA.forEach((pillar,pi)=>{
+    const col=PILLAR_COLORS[pi];
+    const isOpen=facOpenPillars[pi]!==false;
+    let keepCount=0;
+    pillar.subpillars.forEach((sub,si)=>sub.items.forEach((_,oi)=>{if(topVote(agg[`${pi}-${si}-${oi}`])==='keep')keepCount++;}));
+    const overCap=keepCount>MAX_PER_PILLAR;
+    let body='';
+
+    if(phase===1){
+      pillar.subpillars.forEach((sub,si)=>{
+        body+=`<div class="sub-title">${sub.name}</div>`;
+        sub.items.forEach((item,oi)=>{
+          const k=`${pi}-${si}-${oi}`;
+          const v=agg[k]||{keep:0,pause:0,drop:0};
+          const t=n||1;
+          const winner=topVote(v);
+          const chipCls={keep:'chip-keep',pause:'chip-pause',drop:'chip-drop',tie:'chip-tie',null:'chip-open'}[winner]||'chip-open';
+          const chipTxt={keep:'Keep',pause:'Pause',drop:'Drop',tie:'Tied'}[winner]||'—';
+          body+=`<div class="obj-row">
+            <div style="flex:1">
+              <div class="obj-text">${item}</div>
+              ${winner==='tie'?'<div class="tie-flag">⚠ Tied — needs discussion</div>':''}
+            </div>
+            <div class="vote-bars">
+              <div class="vbar-row"><span class="vbar-label">✅</span><div class="vbar-track"><div class="vbar-fill keep" style="width:${pct(v.keep,t)}%"></div></div><span class="vbar-count">${v.keep}</span></div>
+              <div class="vbar-row"><span class="vbar-label">⏸</span><div class="vbar-track"><div class="vbar-fill pause" style="width:${pct(v.pause,t)}%"></div></div><span class="vbar-count">${v.pause}</span></div>
+              <div class="vbar-row"><span class="vbar-label">❌</span><div class="vbar-track"><div class="vbar-fill drop" style="width:${pct(v.drop,t)}%"></div></div><span class="vbar-count">${v.drop}</span></div>
+            </div>
+            <span class="status-chip ${chipCls}">${chipTxt}</span>
+          </div>`;
+        });
+      });
+    } else {
+      const pf=finalists.filter(f=>f.pi===pi);
+      const maxV=Math.max(...pf.map(f=>agg2[f.key]||0),1);
+      pf.forEach((f,idx)=>{
+        const votes=agg2[f.key]||0;
+        const rankCls=idx===0?'rank-1':idx===1?'rank-2':'rank-other';
+        body+=`<div class="finalist-row">
+          <div class="finalist-rank ${rankCls}">${idx+1}</div>
+          <div class="finalist-text">${f.text}</div>
+          <div class="finalist-votes">${votes}</div>
+          <div class="finalist-bar"><div class="finalist-bar-fill" style="width:${pct(votes,maxV)}%"></div></div>
+        </div>`;
+      });
+      if(!pf.length) body='<div style="padding:16px 20px;font-size:0.8rem;color:var(--ink3)">No finalists computed yet.</div>';
+    }
+
+    html+=`<div class="pillar-block${isOpen?'':' closed'}" data-pi="${pi}">
+      <div class="pillar-hd" style="background:${col.light}" onclick="toggleFacPillar(${pi})">
+        <div class="pillar-name" style="color:${col.main}">${pillar.pillar}</div>
+        <div class="pillar-meta">
+          <span class="cap-badge" style="color:${overCap?'var(--drop)':'var(--keep)'}">${keepCount}/${MAX_PER_PILLAR} keep</span>
+          <span class="pillar-toggle" style="color:${col.main}">▾</span>
+        </div>
+      </div>
+      <div class="pillar-body">${body}</div>
+    </div>`;
+  });
+  document.getElementById('facPillars').innerHTML=html;
+}
+
+function renderFac(){
+  document.getElementById('facSummary').innerHTML='';
+  document.getElementById('facPillars').innerHTML='';
+}
+
+function toggleFacPillar(pi){
+  facOpenPillars[pi]=!facOpenPillars[pi];
+  const el=document.querySelector(`.pillar-block[data-pi="${pi}"]`);
+  if(el) el.classList.toggle('closed');
+}
+
+async function advancePhase(){
+  if(phase===1){
+    if(!confirm('Advance all participants to Phase 2 (Top-2 Pick)? This cannot be undone.')) return;
+    const allVotes=await sget(SK_VOTES)||{};
+    const names=Object.keys(allVotes);
+    const n=names.length||1;
+    const agg={};
+    ALL_OBJS.forEach(o=>agg[o.key]={keep:0,pause:0,drop:0});
+    names.forEach(nm=>{const v=allVotes[nm]||{};Object.entries(v).forEach(([k,vt])=>{if(agg[k]&&vt)agg[k][vt]++;});});
+    // Build finalists: top MAX_PER_PILLAR keep per pillar, with tie expansion
+    const finalists=[];
+    DATA.forEach((pillar,pi)=>{
+      const cands=[];
+      pillar.subpillars.forEach((sub,si)=>sub.items.forEach((item,oi)=>{
+        const k=`${pi}-${si}-${oi}`;
+        const v=agg[k]||{keep:0,pause:0,drop:0};
+        cands.push({key:k,text:item,pi,si,oi,keepVotes:v.keep});
+      }));
+      cands.sort((a,b)=>b.keepVotes-a.keepVotes);
+      const cutoff=cands[MAX_PER_PILLAR-1]?.keepVotes||0;
+      cands.forEach((c,idx)=>{
+        if(idx<MAX_PER_PILLAR||(c.keepVotes>0&&c.keepVotes>=cutoff)) finalists.push(c);
+      });
+    });
+    await sset(SK_FINALISTS,finalists);
+    phase=2;
+    await sset(SK_PHASE,2);
+    document.getElementById('advanceBtn').textContent='Show Final Results';
+    document.getElementById('facPhaseLabel').textContent='Phase 2: Top-2 Vote';
+  } else {
+    showResults();
+  }
+}
+
+async function resetAllVotes(){
+  if(!confirm('Reset ALL votes and return to Phase 1?')) return;
+  await Promise.all([sset(SK_VOTES,{}),sset(SK_CONFIRMED,{}),sset(SK_PHASE,1),sset(SK_FINALISTS,[]),sset(SK_P2VOTES,{})]);
+  phase=1;
+  document.getElementById('advanceBtn').disabled=true;
+  document.getElementById('advanceBtn').textContent='Advance to Phase 2 →';
+  syncFac();
+}
+
+// ─── PARTICIPANT ──────────────────────────────
+async function initPar(){
+  const [sv,sc,sp]=await Promise.all([sget(SK_VOTES),sget(SK_CONFIRMED),sget(SK_PHASE)]);
+  if(sv&&sv[myName]) myVotes={...sv[myName]};
+  if(sc&&sc[myName]) confirmedPillars=new Set(sc[myName]);
+  if(sp) phase=sp;
+  if(phase===2) allSubmitted=true;
+  renderPar();
+  syncTimer=setInterval(syncPar, SYNC_MS);
+}
+
+async function syncPar(){
+  const sp=await sget(SK_PHASE)||1;
+  if(sp!==phase){
+    phase=sp;
+    if(phase===2){allSubmitted=true;}
+    renderPar();
+  }
+}
+
+function parTotalVoted(){return Object.keys(myVotes).length;}
+function parPillarVoted(pi){return ALL_OBJS.filter(o=>o.pi===pi&&myVotes[o.key]).length;}
+function parPillarTotal(pi){return ALL_OBJS.filter(o=>o.pi===pi).length;}
+
+function renderPar(){
+  const main=document.getElementById('parMain');
+  document.getElementById('parPhaseLabel').textContent=phase===1?'Phase 1: Prioritize':'Phase 2: Top 2';
+  document.getElementById('parPhaseBanner').textContent=phase===1
+    ?'Vote on each objective: ✅ Keep · ⏸ Pause · ❌ De-prioritize — confirm each pillar when done'
+    :`Select your TOP ${P2_PICKS} priorities from the shortlist`;
+
+  if(phase===1&&allSubmitted&&confirmedPillars.size>=DATA.length){
+    main.innerHTML=`<div class="par-submitted">
+      <div class="par-submitted-icon">✅</div>
+      <div class="big">All pillars confirmed!</div>
+      <div class="sm">Your votes are saved. Waiting for the facilitator to open Phase 2…</div>
+      <div class="waiting-anim"><div class="wdot"></div><div class="wdot"></div><div class="wdot"></div></div>
+    </div>`;
+    return;
+  }
+  if(phase===2&&p2submitted){
+    main.innerHTML=`<div class="par-submitted">
+      <div class="par-submitted-icon">🎉</div>
+      <div class="big">You're done!</div>
+      <div class="sm">Your top picks are in. Watch the facilitator screen for results.</div>
+    </div>`;
+    return;
+  }
+  if(phase===2){renderParP2(main);return;}
+
+  // Phase 1
+  const total=TOTAL, voted=parTotalVoted();
+  document.getElementById('parProgress').style.width=`${Math.round(voted/total*100)}%`;
+
+  let html='';
+  DATA.forEach((pillar,pi)=>{
+    const col=PILLAR_COLORS[pi];
+    const isDone=confirmedPillars.has(pi);
+    const pVoted=parPillarVoted(pi), pTotal=parPillarTotal(pi);
+    const progColor=isDone?'var(--keep)':pVoted>0?'var(--gold)':'var(--ink3)';
+    const progTxt=isDone?'✓ Confirmed':`${pVoted}/${pTotal}`;
+
+    let rows='';
+    pillar.subpillars.forEach((sub,si)=>{
+      rows+=`<div class="par-sub-title">${sub.name}</div>`;
+      sub.items.forEach((item,oi)=>{
+        const k=`${pi}-${si}-${oi}`;
+        const v=myVotes[k]||'';
+        rows+=`<div class="par-obj">
+          <div class="par-obj-text">${item}</div>
+          <div class="par-btns">
+            <button class="pbtn ${v==='keep'?'ak':''}" onclick="parVote('${k}','keep',${pi})" ${isDone?'disabled':''}>✅</button>
+            <button class="pbtn ${v==='pause'?'ap':''}" onclick="parVote('${k}','pause',${pi})" ${isDone?'disabled':''}>⏸️</button>
+            <button class="pbtn ${v==='drop'?'ad':''}" onclick="parVote('${k}','drop',${pi})" ${isDone?'disabled':''}>❌</button>
+          </div>
+        </div>`;
+      });
+    });
+
+    // Confirm bar
+    const allVotedInPillar=pVoted===pTotal;
+    const missing=pTotal-pVoted;
+    let confirmBar='';
+    if(isDone){
+      confirmBar=`<div class="pillar-confirm-bar completed">
+        <div class="confirm-check">✅ Pillar confirmed — votes locked in</div>
+        <button class="confirm-btn" style="background:transparent;color:var(--keep);border:1px solid var(--keep-border);font-size:0.72rem" onclick="unconfirmPillar(${pi})">Edit</button>
+      </div>`;
+    } else {
+      const errorHtml=!allVotedInPillar
+        ?`<div class="confirm-error" id="confirm-err-${pi}" style="display:none">⚠ Please vote on all ${missing} remaining objective${missing!==1?'s':''} before confirming.</div>`:'';
+      confirmBar=`<div class="pillar-confirm-bar">
+        <div style="flex:1">${errorHtml}</div>
+        <button class="confirm-btn" onclick="confirmPillar(${pi})">Confirm Pillar ${pi+1} →</button>
+      </div>`;
+    }
+
+    // Done overlay
+    const doneOverlay=isDone?`<div class="done-overlay"><span>✓ Confirmed</span><small>Tap Edit to change votes</small></div>`:'';
+
+    html+=`<div class="par-pillar${isDone?' done-pillar':''}" id="par-pillar-${pi}">
+      <div class="par-pillar-hd" style="background:${col.light}" onclick="toggleParPillar(${pi})">
+        <div class="par-pillar-name" style="color:${col.main}">${pillar.pillar}</div>
+        <div class="par-pillar-prog" style="color:${progColor}">${progTxt}</div>
+      </div>
+      <div class="pillar-body" id="par-body-${pi}">
+        <div style="position:relative">
+          ${rows}
+          ${doneOverlay}
+        </div>
+        ${confirmBar}
+      </div>
+    </div>`;
+  });
+
+  main.innerHTML=html;
+}
+
+async function parVote(k,v,pi){
+  if(confirmedPillars.has(pi)) return;
+  if(myVotes[k]===v) delete myVotes[k]; else myVotes[k]=v;
+  // Save to storage immediately
+  const all=await sget(SK_VOTES)||{};
+  all[myName]=myVotes;
+  await sset(SK_VOTES,all);
+  renderPar();
+}
+
+async function confirmPillar(pi){
+  const pVoted=parPillarVoted(pi), pTotal=parPillarTotal(pi);
+  if(pVoted<pTotal){
+    const errEl=document.getElementById(`confirm-err-${pi}`);
+    if(errEl){
+      errEl.style.display='block';
+      errEl.textContent=`⚠ Please vote on all ${pTotal-pVoted} remaining objective${pTotal-pVoted!==1?'s':''} before confirming.`;
+      errEl.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    return;
+  }
+  confirmedPillars.add(pi);
+  // Save confirmed
+  const all=await sget(SK_CONFIRMED)||{};
+  all[myName]=[...confirmedPillars];
+  await sset(SK_CONFIRMED,all);
+  // Also save latest votes
+  const allV=await sget(SK_VOTES)||{};
+  allV[myName]=myVotes;
+  await sset(SK_VOTES,allV);
+
+  if(confirmedPillars.size>=DATA.length) allSubmitted=true;
+  renderPar();
+  // Scroll to next unconfirmed pillar
+  setTimeout(()=>{
+    const next=DATA.findIndex((_,i)=>!confirmedPillars.has(i));
+    if(next>=0) document.getElementById(`par-pillar-${next}`)?.scrollIntoView({behavior:'smooth',block:'start'});
+  },300);
+}
+
+async function unconfirmPillar(pi){
+  confirmedPillars.delete(pi);
+  allSubmitted=false;
+  const all=await sget(SK_CONFIRMED)||{};
+  all[myName]=[...confirmedPillars];
+  await sset(SK_CONFIRMED,all);
+  renderPar();
+}
+
+function toggleParPillar(pi){
+  const body=document.getElementById(`par-body-${pi}`);
+  if(body) body.classList.toggle('hidden');
+}
+
+async function renderParP2(main){
+  const finalists=await sget(SK_FINALISTS)||[];
+  if(!finalists.length){
+    main.innerHTML=`<div class="par-submitted"><div class="big" style="font-size:1.4rem">Loading Phase 2…</div><div class="waiting-anim"><div class="wdot"></div><div class="wdot"></div><div class="wdot"></div></div></div>`;
+    return;
+  }
+  const totalSel=Object.keys(myP2Votes).length;
+  const atLimit=totalSel>=P2_PICKS;
+
+  let html=atLimit
+    ?`<div class="par-p2-limit" style="background:var(--keep-bg);border:1px solid var(--keep-border);color:var(--keep)">✅ ${P2_PICKS} priorities selected — deselect one to change</div>`
+    :`<div class="par-p2-limit" style="background:var(--pause-bg);border:1px solid var(--pause-border);color:var(--pause)">Choose your top ${P2_PICKS} priorities from the shortlist (${totalSel}/${P2_PICKS} selected)</div>`;
+
+  DATA.forEach((pillar,pi)=>{
+    const pf=finalists.filter(f=>f.pi===pi);
+    if(!pf.length) return;
+    const col=PILLAR_COLORS[pi];
+    let rows='';
+    pf.forEach(f=>{
+      const sel=!!myP2Votes[f.key];
+      const locked=!sel&&atLimit;
+      rows+=`<div class="par-p2-obj${sel?' selected':''}${locked?' locked':''}" onclick="${locked?'':'p2Toggle(\''+f.key+'\')'}">
+        <div class="p2-checkbox${sel?' checked':''}">${sel?'✓':''}</div>
+        <div class="par-obj-text">${f.text}</div>
+      </div>`;
+    });
+    html+=`<div class="par-pillar">
+      <div class="par-pillar-hd" style="background:${col.light}">
+        <div class="par-pillar-name" style="color:${col.main}">${pillar.pillar}</div>
+      </div>
+      <div class="pillar-body">${rows}</div>
+    </div>`;
+  });
+
+  html+=`<div style="padding:18px;text-align:center">
+    <button onclick="submitP2()" style="background:${atLimit?'var(--keep)':'#ccc'};color:#fff;border:none;border-radius:10px;padding:14px 36px;font-size:0.92rem;font-weight:700;width:100%;max-width:320px;transition:background 0.2s">
+      Submit My Top ${P2_PICKS} Picks (${totalSel}/${P2_PICKS})
+    </button>
+    ${!atLimit?'<div style="font-size:0.74rem;color:var(--ink3);margin-top:8px">Select '+P2_PICKS+' to enable submit</div>':''}
+  </div>`;
+
+  main.innerHTML=html;
+}
+
+async function p2Toggle(k){
+  const sel=!!myP2Votes[k];
+  if(!sel&&Object.keys(myP2Votes).length>=P2_PICKS) return;
+  if(sel) delete myP2Votes[k]; else myP2Votes[k]=true;
+  const all=await sget(SK_P2VOTES)||{};
+  all[myName]=myP2Votes;
+  await sset(SK_P2VOTES,all);
+  const main=document.getElementById('parMain');
+  renderParP2(main);
+}
+
+async function submitP2(){
+  if(Object.keys(myP2Votes).length<P2_PICKS){alert(`Please select ${P2_PICKS} priorities first.`);return;}
+  const all=await sget(SK_P2VOTES)||{};
+  all[myName]=myP2Votes;
+  await sset(SK_P2VOTES,all);
+  p2submitted=true;
+  renderPar();
+}
+
+// ─── RESULTS ──────────────────────────────────
+async function showResults(){
+  const [allVotes,p2votes,finalists]=await Promise.all([sget(SK_VOTES)||{},sget(SK_P2VOTES)||{},sget(SK_FINALISTS)||[]]);
+  const names=Object.keys(allVotes);
+  const n=names.length||1;
+  const agg={};
+  ALL_OBJS.forEach(o=>agg[o.key]={keep:0,pause:0,drop:0});
+  names.forEach(nm=>{const v=allVotes[nm]||{};Object.entries(v).forEach(([k,vt])=>{if(agg[k]&&vt)agg[k][vt]++;});});
+  const agg2={};
+  Object.values(p2votes).forEach(pv=>{Object.keys(pv).forEach(k=>{agg2[k]=(agg2[k]||0)+1;});});
+
+  let html=`<div style="background:#f8f7f3;border-radius:8px;padding:14px 18px;margin-bottom:22px;font-size:0.8rem;color:var(--ink2)">
+    <strong>${names.length} participant${names.length!==1?'s':''} voted</strong> · Phase 1: Priority Voting${phase>=2?' · Phase 2: Top-'+P2_PICKS+' Picks':''}
+  </div>`;
+
+  DATA.forEach((pillar,pi)=>{
+    const col=PILLAR_COLORS[pi];
+    const pf=finalists.filter(f=>f.pi===pi).map(f=>({...f,p2v:agg2[f.key]||0})).sort((a,b)=>b.p2v-a.p2v);
+    html+=`<div class="results-pillar">
+      <div class="rp-title" style="color:${col.main}">${pillar.pillar}</div>`;
+
+    if(phase>=2&&pf.length){
+      html+=`<div style="font-size:0.67rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px">Top picks — Phase 2 votes</div>`;
+      pf.forEach((f,idx)=>{
+        const rcls=idx===0?'rank-1':idx===1?'rank-2':'rank-other';
+        html+=`<div class="result-item">
+          <div class="finalist-rank-sm ${rcls}">${idx+1}</div>
+          <div class="ri-text">${f.text}</div>
+          <div class="ri-meta">${f.p2v} vote${f.p2v!==1?'s':''}</div>
+        </div>`;
+      });
+    } else {
+      const keeps=[];
+      pillar.subpillars.forEach((sub,si)=>sub.items.forEach((item,oi)=>{
+        const k=`${pi}-${si}-${oi}`;const v=agg[k]||{keep:0,pause:0,drop:0};
+        if(topVote(v)==='keep')keeps.push({item,v});
+      }));
+      keeps.sort((a,b)=>b.v.keep-a.v.keep).forEach(({item,v})=>{
+        html+=`<div class="result-item"><span class="ri-icon">✅</span><div class="ri-text">${item}</div><div class="ri-meta">${v.keep} keep</div></div>`;
+      });
+    }
+
+    const paused=[],dropped=[];
+    pillar.subpillars.forEach((sub,si)=>sub.items.forEach((item,oi)=>{
+      const k=`${pi}-${si}-${oi}`;const w=topVote(agg[k]);
+      if(w==='pause')paused.push(item);if(w==='drop')dropped.push(item);
+    }));
+    paused.forEach(item=>{html+=`<div class="result-item"><span class="ri-icon">⏸</span><div class="ri-text" style="color:var(--pause)">${item}</div></div>`;});
+    dropped.forEach(item=>{html+=`<div class="result-item"><span class="ri-icon">❌</span><div class="ri-text" style="color:var(--drop);text-decoration:line-through">${item}</div></div>`;});
+    html+='</div>';
+  });
+
+  document.getElementById('resultsBody').innerHTML=html;
+  document.getElementById('resultsOverlay').classList.add('open');
+}
+
+function closeResults(){document.getElementById('resultsOverlay').classList.remove('open');}
+
+async function exportResults(){
+  const [allVotes,p2votes,finalists]=await Promise.all([sget(SK_VOTES)||{},sget(SK_P2VOTES)||{},sget(SK_FINALISTS)||[]]);
+  const names=Object.keys(allVotes);
+  const agg={};
+  ALL_OBJS.forEach(o=>agg[o.key]={keep:0,pause:0,drop:0});
+  names.forEach(nm=>{const v=allVotes[nm]||{};Object.entries(v).forEach(([k,vt])=>{if(agg[k]&&vt)agg[k][vt]++;});});
+  const agg2={};
+  Object.values(p2votes).forEach(pv=>{Object.keys(pv).forEach(k=>{agg2[k]=(agg2[k]||0)+1;});});
+  let out=`BABILOU FAMILY US — STRATEGY WORKSHOP RESULTS\n2025–2028 Strategic Plan\n${'='.repeat(56)}\nDate: ${new Date().toLocaleDateString()}\nParticipants (${names.length}): ${names.join(', ')}\n\n`;
+  DATA.forEach((pillar,pi)=>{
+    out+=`${'─'.repeat(56)}\n${pillar.pillar.toUpperCase()}\n${'─'.repeat(56)}\n`;
+    const pf=finalists.filter(f=>f.pi===pi).sort((a,b)=>(agg2[b.key]||0)-(agg2[a.key]||0));
+    if(pf.length){out+=`TOP PICKS (Phase 2):\n`;pf.forEach((f,i)=>{out+=`  ${i+1}. ${f.text} [${agg2[f.key]||0} votes]\n`;});out+='\n';}
+    ['keep','pause','drop'].forEach(cat=>{
+      const label={keep:'KEEP & ACCELERATE',pause:'PAUSE & REVISIT',drop:'DE-PRIORITIZE'}[cat];
+      const items=[];
+      pillar.subpillars.forEach((sub,si)=>sub.items.forEach((item,oi)=>{
+        const k=`${pi}-${si}-${oi}`;if(topVote(agg[k])===cat)items.push({item,v:agg[k]});
+      }));
+      if(items.length){out+=`${label}:\n`;items.forEach(({item,v})=>{out+=`  • ${item} (K:${v.keep} P:${v.pause} D:${v.drop})\n`;});out+='\n';}
+    });
+  });
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([out],{type:'text/plain'}));
+  a.download='babilou-family-us-strategy-workshop-results.txt';
+  a.click();
+}
+</script>
+</body>
+</html>
